@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <title>ACE Stream Yayın Seçici</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body {
+      background: #222;
+      color: #fff;
+      font-family: Arial, sans-serif;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+      justify-content: center;
+    }
+    h2 {
+      margin-bottom: 30px;
+      font-size: 2rem;
+      letter-spacing: 1px;
+      color: #27ae60;
+    }
+    .button-row {
+      display: flex;
+      gap: 24px;
+      margin-bottom: 40px;
+    }
+    .button-row button {
+      padding: 20px 36px;
+      border: none;
+      border-radius: 8px;
+      background: #27ae60;
+      color: #fff;
+      font-size: 1.5rem;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 0 4px 16px #0005;
+      transition: background 0.2s, transform 0.1s;
+    }
+    .button-row button:hover, .button-row button.selected {
+      background: #219150;
+      transform: scale(1.08);
+    }
+    .acestream-info {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      background: #111;
+      border-radius: 8px;
+      padding: 30px 20px;
+      margin-top: 10px;
+      box-shadow: 0 2px 12px #0005;
+      max-width: 350px;
+      text-align: center;
+      animation: fadeIn 0.4s;
+    }
+    .acestream-info.active {
+      display: flex;
+    }
+    .open-btn {
+      display: inline-block;
+      margin-top: 18px;
+      background: #1e88e5;
+      color: #fff;
+      font-size: 1.1rem;
+      padding: 12px 22px;
+      border: none;
+      border-radius: 5px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: background 0.2s;
+    }
+    .open-btn:hover {
+      background: #1565c0;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(30px);}
+      to { opacity: 1; transform: translateY(0);}
+    }
+  </style>
+</head>
+<body>
+  <h2>Yayın Seçiniz</h2>
+  <div class="button-row">
+    <button onclick="showInfo(0)" id="btn0">Yayın 1</button>
+    <button onclick="showInfo(1)" id="btn1">Yayın 2</button>
+    <button onclick="showInfo(2)" id="btn2">Yayın 3</button>
+    <button onclick="showInfo(3)" id="btn3">Yayın 4</button>
+  </div>
+  <div class="acestream-info" id="infoBox">
+    <span id="infoText">
+      Lütfen bu yayını <b>ACE Stream Player</b> uygulamasında açın.
+    </span>
+    <a id="aceLink" class="open-btn" href="#" target="_blank">
+      ACE Stream Player’da Aç
+    </a>
+  </div>
+  <script>
+    // Buraya kendi ACE Stream linklerinizi girin
+    const aceLinks = [
+      "acestream://118416583faa3fb4f03800173429b6b844b43a52",
+      "acestream://b2c1d3e4f5a67890123456789abcdef012345678",
+      "acestream://c3d2e1f4a587690123456789abcdef0123456789",
+      "acestream://d4e3f2a1b587690123456789abcdef0123456789"
+    ];
+
+    function showInfo(idx) {
+      // Buton seçimini görsel olarak belirt
+      for(let i=0;i<4;i++) {
+        document.getElementById("btn"+i).classList.remove("selected");
+      }
+      document.getElementById("btn"+idx).classList.add("selected");
+
+      // Deep linki göster
+      const aceLink = aceLinks[idx];
+      document.getElementById('aceLink').href = aceLink;
+      document.getElementById('infoBox').classList.add('active');
+    }
+  </script>
+</body>
+</html>
